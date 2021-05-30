@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\User;
+use App\Notifications\ReplyNotification;
 
 class PostsController extends Controller
 {
@@ -53,6 +55,8 @@ class PostsController extends Controller
             'post_id' => $id,
             'comment' => $request->comment
         ]);
+        $user = $request->user();
+        $user->notify(new ReplyNotification);
         return response()->json([
             'message' => "reply is successfully added",
             'error' => false
