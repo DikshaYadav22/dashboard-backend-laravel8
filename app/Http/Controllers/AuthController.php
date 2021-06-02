@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
+
 class AuthController extends Controller
 {
     public function login(Request $request)
@@ -62,5 +63,19 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         return response()->json($request->user());
+    }
+
+    public function updateUserType(Request $request)
+    {
+        $user = $request->user();
+        $id =  $user['id'];
+        User::where('id', $id)->update([
+            'user_type' => 1
+        ]);
+        return [
+            "message" => "User updated successfully",
+            'userData' => $user,
+            'error' => false,
+        ];
     }
 }

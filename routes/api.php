@@ -35,4 +35,5 @@ Route::group([
     Route::resource('posts', PostsController::class);
     Route::resource('categories', CategoriesController::class);
     Route::post('post/{id}/add-reply', [PostsController::class, 'addReply']);
+    Route::get('update-user', [AuthController::class, 'updateUserType']);
 });
